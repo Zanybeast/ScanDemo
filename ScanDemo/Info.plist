@@ -60,5 +60,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSNetworkVolumesUsageDescription</key>
+	<string>Need to use WiFi</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Need to use your location</string>
 </dict>
 </plist>

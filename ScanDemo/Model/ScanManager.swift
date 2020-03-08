@@ -7,6 +7,7 @@
 //
 import UIKit
 import Foundation
+import CoreData
 
 protocol ScanManagerDelegate {
     func scanIPAddressesFinished()
@@ -21,6 +22,10 @@ class ScanManager: NSObject, MMLANScannerDelegate {
     @objc dynamic var progressValue : Float = 0.0
     @objc dynamic var isScanRunning : Bool = false
     
+    //Create CoreData to store Data
+//    var devices = [Device]()
+//    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("device.plist")
+//    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var lanScanner: MMLANScanner!
     
@@ -67,10 +72,54 @@ class ScanManager: NSObject, MMLANScannerDelegate {
         return LANProperties.fetchSSIDInfo()
     }
     
+    //MARK: - CoreData Methods
+//    func saveDevice() {
+//        do {
+//            try context.save()
+//        } catch {
+//            print("Error saving context \(error)")
+//        }
+//    }
+//
+//    func loadDevice() {
+//        let request : NSFetchRequest<Device> = Device.fetchRequest()
+//
+//        do {
+//            devices = try context.fetch(request)
+//        } catch {
+//            print("Error fetching data from context \(error)")
+//        }
+//    }
+//
+//    func destroyDevice() {
+//        let fetchRequest : NSFetchRequest<Device> = Device.fetchRequest()
+//        fetchRequest.returnsObjectsAsFaults = false
+//
+//        do {
+//            let results = try context.fetch(fetchRequest)
+//            for managedObject in results {
+//                let managedObjectData: NSManagedObject = managedObject as NSManagedObject
+//                context.delete(managedObjectData)
+//            }
+//        } catch {
+//            print("Error deleting all objects: \(error)")
+//        }
+//
+//        devices.removeAll()
+//
+//    }
+    
     //MARK: - MMLANScanner Delegate
     func lanScanDidFindNewDevice(_ device: MMDevice!) {
         if(!self.connectedDevices .contains(device)) {
             self.connectedDevices?.append(device)
+//            let newDevice = Device(context: self.context)
+//            newDevice.brand = device.brand
+//            newDevice.hostname = device.hostname
+//            newDevice.ipAddress = device.ipAddress
+//            newDevice.mac = device.macAddress
+            
+//            self.saveDevice()
         }
         
         let ipSortDescriptor = NSSortDescriptor(key: "ipAddress", ascending: true)

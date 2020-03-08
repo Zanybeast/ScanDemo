@@ -16,12 +16,16 @@ class MainViewController: UIViewController {
     @IBOutlet weak var tableviewTopConstraint: NSLayoutConstraint!
     
     var scanManager: ScanManager!
+    var deviceForPort: MMDevice?
     
     private var kvoContext = 0
     
     //MARK: - View On Load Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        scanManager.loadDevice()
+//        tableView.reloadData()
         
         //set navigation bar
         navigationItem.title = "LAN Devices Scan"
@@ -67,6 +71,7 @@ class MainViewController: UIViewController {
     
     //MARK: - Refresh Button Clicked
     @IBAction func refreshPressed(_ sender: UIBarButtonItem) {
+//        scanManager.destroyDevice()
         showProgressView()
         navigationItem.title = "Scanning"
         scanManager.scanButtonPressed()
@@ -114,6 +119,7 @@ extension MainViewController: ScanManagerDelegate {
     func scanIPAddressesFinished() {
         hideProgressView()
         showAlert(title: "Scan finished", message: "Number of devices connected to LAN: \(scanManager.connectedDevices.count)")
+        navigationItem.title = "LAN Devices Scan"
     }
     
     func scanIPAddressesCancelled() {
@@ -132,7 +138,7 @@ extension MainViewController: ScanManagerDelegate {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return scanManager.connectedDevices!.count
+        return scanManager.connectedDevices.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -144,7 +150,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         if device.macAddress == nil || device.macAddress == "02:00:00:00:00:00" {
             cell.macLabel.text = "MAC unavailable"
         } else {
-            cell.macLabel.text = String(format: "MAC: %@", device.macAddress)
+            cell.macLabel.text = String(format: "MAC: %@", device.macAddress!)
         }
         cell.hostName.text = device.hostname
         cell.brand.text = device.brand
@@ -153,12 +159,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        deviceForPort = scanManager.connectedDevices[indexPath.row]
         performSegue(withIdentifier: "goToPortView", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! PortStatusViewController
-        
+        destinationVC.device = deviceForPort
     }
 }

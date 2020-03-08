@@ -48,16 +48,16 @@
                                 <rect key="frame" x="0.0" y="30.5" width="327" height="23.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAC: FF:FF:FF:FF:FF:FF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWD-LD-7ac">
-                                        <rect key="frame" x="2" y="2" width="180" height="19.5"/>
+                                        <rect key="frame" x="2" y="2" width="200" height="19.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="180" id="cgr-oB-G6f"/>
+                                            <constraint firstAttribute="width" constant="200" id="cgr-oB-G6f"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="brand" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBc-Cz-G8b">
-                                        <rect key="frame" x="192" y="2" width="133" height="19.5"/>
+                                        <rect key="frame" x="212" y="2" width="113" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
