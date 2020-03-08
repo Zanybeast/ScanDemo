@@ -1,0 +1,28 @@
+PODS:
+  - CocoaAsyncSocket (7.6.4)
+  - MMLanScan (3.0.0)
+  - SnapKit (5.0.1)
+  - SwiftSocket (2.0.2)
+
+DEPENDENCIES:
+  - CocoaAsyncSocket
+  - MMLanScan
+  - SnapKit
+  - SwiftSocket
+
+SPEC REPOS:
+  trunk:
+    - CocoaAsyncSocket
+    - MMLanScan
+    - SnapKit
+    - SwiftSocket
+
+SPEC CHECKSUMS:
+  CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
+  MMLanScan: 86a0f77edbf163be30c1f58321469c7c8ce4c50e
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftSocket: 6f4c9c63fbc5c1d61188936bb3c599fd546f40ae
+
+PODFILE CHECKSUM: 6b900022dfb9f60097a4a3e044ce02ec2d30b10e
+
+COCOAPODS: 1.9.0
