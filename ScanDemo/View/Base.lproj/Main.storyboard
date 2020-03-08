@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AK8-TO-0m8">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="ScanDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="K0i-5r-Czu"/>
+                        <viewControllerLayoutGuide type="bottom" id="sOu-VG-N69"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WGn-3U-Ykx">
+                                <rect key="frame" x="10" y="84" width="394" height="4"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="wAv-oG-PCJ"/>
+                                </constraints>
+                            </progressView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L5U-VE-fjm">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReusableCell" id="IJf-yu-0LZ">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IJf-yu-0LZ" id="IC4-99-8yG">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="rEZ-dL-eyE"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="7w5-xf-QeV"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="WGn-3U-Ykx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="42i-zg-Xu9"/>
+                            <constraint firstItem="L5U-VE-fjm" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="Qeq-y1-FAo"/>
+                            <constraint firstItem="L5U-VE-fjm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fGn-j9-qaU"/>
+                            <constraint firstAttribute="trailing" secondItem="WGn-3U-Ykx" secondAttribute="trailing" constant="10" id="lWZ-xx-yRi"/>
+                            <constraint firstItem="L5U-VE-fjm" firstAttribute="top" secondItem="K0i-5r-Czu" secondAttribute="bottom" id="p50-qz-dX9"/>
+                            <constraint firstAttribute="bottom" secondItem="L5U-VE-fjm" secondAttribute="bottom" id="u51-sx-VcY"/>
+                            <constraint firstItem="L5U-VE-fjm" firstAttribute="top" secondItem="WGn-3U-Ykx" secondAttribute="bottom" id="wlh-79-poI"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="S9c-y9-XQw">
+                        <barButtonItem key="rightBarButtonItem" image="refresh" id="xjg-De-Un8">
+                            <connections>
+                                <action selector="refreshPressed:" destination="BYZ-38-t0r" id="Faj-Pc-Vvw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="progressView" destination="WGn-3U-Ykx" id="uU9-of-Q04"/>
+                        <outlet property="scanButton" destination="xjg-De-Un8" id="Z62-FJ-ZRW"/>
+                        <outlet property="tableView" destination="L5U-VE-fjm" id="PQ3-wX-CxM"/>
+                        <outlet property="tableviewTopConstraint" destination="p50-qz-dX9" id="yln-DD-8Ww"/>
+                        <segue destination="zZV-Oe-L49" kind="show" identifier="goToPortView" id="T5S-w2-9IX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1042.0289855072465" y="137.94642857142856"/>
+        </scene>
+        <!--Port Status View Controller-->
+        <scene sceneID="tYs-Kn-OIj">
+            <objects>
+                <viewController id="zZV-Oe-L49" customClass="PortStatusViewController" customModule="ScanDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KKT-jT-jtF"/>
+                        <viewControllerLayoutGuide type="bottom" id="gJx-W7-uga"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KCJ-7M-oDQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Port Stauts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2Y-sz-ksc">
+                                <rect key="frame" x="100" y="128" width="214.5" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="JXn-mN-2wq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="v2Y-sz-ksc" firstAttribute="top" secondItem="KKT-jT-jtF" secondAttribute="bottom" constant="40" id="nbv-qK-3cK"/>
+                            <constraint firstItem="v2Y-sz-ksc" firstAttribute="centerX" secondItem="KCJ-7M-oDQ" secondAttribute="centerX" id="yXR-hk-D5b"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="GIC-VL-aoQ"/>
+                    <connections>
+                        <outlet property="portStatusLabel" destination="v2Y-sz-ksc" id="Jnw-Zl-d3F"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qz4-9t-Kv1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2287" y="138"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="veh-l1-ZW7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AK8-TO-0m8" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DnW-kU-yuf">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="mOA-eo-R8y"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iga-3n-ahE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="137.94642857142856"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="refresh" width="25" height="25"/>
+    </resources>
+</document>
