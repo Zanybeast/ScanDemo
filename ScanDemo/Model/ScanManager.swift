@@ -6,7 +6,6 @@
 //  Copyright © 2020 曾钊. All rights reserved.
 //
 import UIKit
-import Foundation
 import CoreData
 
 protocol ScanManagerDelegate {
@@ -23,9 +22,9 @@ class ScanManager: NSObject, MMLANScannerDelegate {
     @objc dynamic var isScanRunning : Bool = false
     
     //Create CoreData to store Data
-//    var devices = [Device]()
-//    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("device.plist")
-//    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    @objc dynamic var devicesLocal = [CDevice]()
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("localDevices.plist")
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var lanScanner: MMLANScanner!
     
@@ -55,8 +54,10 @@ class ScanManager: NSObject, MMLANScannerDelegate {
         if isScanRunning {
             stopNetworkScan()
             connectedDevices.removeAll()
+            removeAllDevice()
         } else {
             connectedDevices.removeAll()
+            removeAllDevice()
             isScanRunning = true
             lanScanner.start()
         }
@@ -73,56 +74,79 @@ class ScanManager: NSObject, MMLANScannerDelegate {
     }
     
     //MARK: - CoreData Methods
-//    func saveDevice() {
-//        do {
-//            try context.save()
-//        } catch {
-//            print("Error saving context \(error)")
-//        }
-//    }
-//
-//    func loadDevice() {
-//        let request : NSFetchRequest<Device> = Device.fetchRequest()
-//
-//        do {
-//            devices = try context.fetch(request)
-//        } catch {
-//            print("Error fetching data from context \(error)")
-//        }
-//    }
-//
-//    func destroyDevice() {
-//        let fetchRequest : NSFetchRequest<Device> = Device.fetchRequest()
+    func saveDevice() {
+        do {
+            try context.save()
+        } catch {
+            print("Error saving context \(error)")
+        }
+    }
+
+    func loadDevice() {
+        let request : NSFetchRequest<CDevice> = CDevice.fetchRequest()
+
+        do {
+            devicesLocal = try context.fetch(request)
+            for deviceL in devicesLocal {
+                let device = MMDevice()
+                device.hostname = deviceL.hostname
+                device.brand = deviceL.brand
+                device.ipAddress = deviceL.ipAddress
+                device.macAddress = deviceL.macAddress
+                
+                self.connectedDevices.append(device)
+                
+            }
+            print(devicesLocal)
+        } catch {
+            print("Error fetching data from context \(error)")
+        }
+        
+    }
+
+    func removeAllDevice() {
+        let fetchRequest : NSFetchRequest<CDevice> = CDevice.fetchRequest()
 //        fetchRequest.returnsObjectsAsFaults = false
-//
-//        do {
-//            let results = try context.fetch(fetchRequest)
-//            for managedObject in results {
-//                let managedObjectData: NSManagedObject = managedObject as NSManagedObject
-//                context.delete(managedObjectData)
-//            }
-//        } catch {
-//            print("Error deleting all objects: \(error)")
-//        }
-//
-//        devices.removeAll()
-//
-//    }
+
+        do {
+            let results = try context.fetch(fetchRequest)
+            for managedObject in results {
+                let managedObjectData: CDevice = managedObject as CDevice
+                context.delete(managedObjectData)
+            }
+        } catch {
+            print("Error deleting all objects: \(error)")
+        }
+
+        devicesLocal.removeAll()
+        
+        saveDevice()
+
+    }
     
     //MARK: - MMLANScanner Delegate
     func lanScanDidFindNewDevice(_ device: MMDevice!) {
-        if(!self.connectedDevices .contains(device)) {
+        if(!self.connectedDevices.contains(device)) {
             self.connectedDevices?.append(device)
-//            let newDevice = Device(context: self.context)
-//            newDevice.brand = device.brand
-//            newDevice.hostname = device.hostname
-//            newDevice.ipAddress = device.ipAddress
-//            newDevice.mac = device.macAddress
             
-//            self.saveDevice()
+            //Data localize
+            let newDevice = CDevice(context: self.context)
+            newDevice.brand = device.brand
+            newDevice.hostname = device.hostname
+            newDevice.ipAddress = device.ipAddress
+            newDevice.macAddress = device.macAddress
+            devicesLocal.append(newDevice)
+            
+            self.saveDevice()
         }
         
+        
         let ipSortDescriptor = NSSortDescriptor(key: "ipAddress", ascending: true)
+        
+        let request : NSFetchRequest<CDevice> = CDevice.fetchRequest()
+        let ipSortDescriptors = [ipSortDescriptor]
+        request.sortDescriptors = ipSortDescriptors
+        
         self.connectedDevices = ((self.connectedDevices as NSArray).sortedArray(using: [ipSortDescriptor]) as! Array)
         
     }
@@ -135,6 +159,7 @@ class ScanManager: NSObject, MMLANScannerDelegate {
         } else if status == MMLanScannerStatusCancelled {
             self.delegate?.scanIPAddressesCancelled()
         }
+        
     }
     
     func lanScanDidFailedToScan() {
