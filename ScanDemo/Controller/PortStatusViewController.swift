@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class PortStatusViewController: UIViewController, GCDAsyncSocketDelegate {
     
@@ -33,7 +34,7 @@ class PortStatusViewController: UIViewController, GCDAsyncSocketDelegate {
         
         //Scan the ports
         for i in 0..<self.allTestPorts.count {
-            self.connectToHost(ipAddress: self.device.ipAddress, onPort: self.allTestPorts[i])
+            self.connectToHost(ipAddress: self.device.ipAddress!, onPort: self.allTestPorts[i])
         }
             
         

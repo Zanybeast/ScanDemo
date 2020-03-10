@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="CDevice" representedClassName="CDevice" syncable="YES" codeGenerationType="class">
+    <entity name="CDevice" representedClassName=".CDevice" syncable="YES" codeGenerationType="class">
         <attribute name="brand" optional="YES" attributeType="String"/>
         <attribute name="hostname" optional="YES" attributeType="String"/>
         <attribute name="ipAddress" optional="YES" attributeType="String"/>
-        <attribute name="mac" optional="YES" attributeType="String"/>
+        <attribute name="macAddress" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="CDevice" positionX="-54" positionY="-9" width="128" height="103"/>
